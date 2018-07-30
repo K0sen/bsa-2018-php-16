@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <ul>
+      <li><router-link to="/parent">/parent</router-link></li>
+      <li><router-link to="/parent/foo">/parent/foo</router-link></li>
+      <li><router-link to="/parent/bar">/parent/bar</router-link></li>
+      <li><router-link to="/baz">/baz</router-link></li>
+    </ul>
     <UserList></UserList>
   </div>
 </template>
