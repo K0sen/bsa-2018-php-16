@@ -1,14 +1,13 @@
 <template>
-  <div v-if="user" class="user-item-container">
-    <h2>Info about #{{ user.id }}</h2>
+  <div v-if="album" class="user-item-container">
+    <h2>Info about #{{ album.id }}</h2>
     <div class="user-info">
-      <div>{{ user.name }}</div>
-      <div>{{ user.email }}</div>
-      <div><img :src="user.avatar" alt="avatar" class="user__avatar"></div>
+      <div>{{ album.title }}</div>
+      <router-link :to="`/user/${album.userId}`" >User Id: {{ album.userId }}</router-link>
     </div>
     <div class="nav">
-      <router-link :to="`/user/${user.id}/edit`" tag="button" class="btn btn-info">Update</router-link>
-      <button class="btn btn-danger" @click="onDeleteUser">Delete</button>
+      <!--<router-link :to="`/user/${user.id}/edit`" tag="button" class="btn btn-info">Update</router-link>-->
+      <button class="btn btn-danger" @click="onDeleteAlbum">Delete</button>
     </div>
   </div>
   <div v-else class="container">
@@ -17,23 +16,29 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 export default {
   name: "UserView",
   data() {
     return {
       id: this.$route.params.id,
-      user: {}
+      album: {}
     }
   },
 
   created() {
-    this.user = this.$store.getters['users/getById'](this.id);
+    this.album = this.getById(this.id);
+  },
+
+  computed: {
+    ...mapGetters("albums", ["getById"]),
   },
 
   methods: {
-    onDeleteUser() {
-      this.$store.dispatch("users/deleteUser", this.user.id)
-        .then(() => this.$router.push(`/users`));
+    onDeleteAlbum() {
+      this.$store.dispatch("albums/deleteAlbum", this.album.id)
+        .then(() => this.$router.push(`/albums`));
     }
   }
 };

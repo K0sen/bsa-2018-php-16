@@ -19,7 +19,7 @@
 <script>
   export default {
     props: {
-      user: {
+      album: {
         type: Object,
         required: true
       }

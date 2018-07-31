@@ -5,6 +5,7 @@
       <div>User: {{ album.user.name }}</div>
     </div>
     <div class="nav">
+      <router-link :to="`/album/${album.id}`" tag="button" class="btn btn-info">Info</router-link>
       <button class="btn btn-danger " @click="onDeleteAlbum">Delete</button>
     </div>
   </div>

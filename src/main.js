@@ -38,10 +38,11 @@ new Vue({
   store,
 });
 
+// TODO
 // Why mutations is UPPER_CASE? convention?
 // why to name a components?
 // how to call getters correctly?
 // why data in storage is const ??
-// users is loading on main page so at start u cannot go to /user/1 => how to correctly load start data ?
-// i have to mock album because they don't mapped if their count = 100
+// while axios => users is loading on main page so at start u cannot go to /user/1 => how to correctly load start data ?
+// i have to mock album because they don't mapped if loaded from axios and their count = 100
 // Cannot use src attr on img, should use :src
