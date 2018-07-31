@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-let lastId = 0;
+let lastId = 3;
 
 // local state
 const state = {
@@ -11,6 +11,15 @@ const getters = {
   // state is module's local state
   sortedByName: state => {
     return state.users.sort((a, b) => a.name < b.name);
+  },
+
+  getById: state => id => {
+    for (let i in state.users) {
+      if (state.users[i].id === parseInt(id)) {
+        return state.users[i];
+      }
+    }
+    return null;
   }
 };
 
@@ -54,7 +63,7 @@ const actions = {
     return new Promise(resolve => {
       setTimeout(() => {
         commit('ADD_USER', data);
-        resolve();
+        resolve(state.users[state.users.length - 1]);
       }, 250);
     });
   },

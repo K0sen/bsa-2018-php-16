@@ -1,11 +1,12 @@
 <template>
   <div class="users-container">
-    <UserForm v-bind:user="newUser" v-on:addUser="onAddUser"/>
-    <div class="user-list">
-      <template v-for="user in users">
-        <UserItem :key="user.id" :user="user" />
-      </template>
-    </div>
+    <!--<UserForm v-bind:user="newUser" v-on:addUser="onAddUser"/>-->
+    <!--<div class="user-list">-->
+      <!--<template v-for="user in users">-->
+        <!--<UserItem :key="user.id" :user="user" />-->
+      <!--</template>-->
+    <!--</div>-->
+    sdfda
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import UserForm from "./AlbumForm";
 import axios from "axios";
 
 export default {
+  name: "AlbumList",
   components: {
     UserItem,
     UserForm

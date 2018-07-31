@@ -1,24 +1,13 @@
 <template>
   <div class="user-item-container">
-    <div v-if="isEdit" class="user-edit-form">
-      <div class="form-control">
-        <input type="text" id="name" v-model.trim="name">
-      </div>
-      <div class="form-control">
-        <input type="text" id="email" v-model.trim="email">
-      </div>
-      <div class="form-control">
-        <input type="text" id="avatar" v-model.trim="avatar">
-      </div>
-    </div>
-    <div v-else class="user-info">
+    <div class="user-info">
       <div>{{ user.name }}</div>
       <div>{{ user.email }}</div>
       <div><img :src="user.avatar" alt="avatar" class="user__avatar"></div>
     </div>
     <div class="nav">
-      <router-link to="/albums" role="button" class="btn">Users</router-link>
-      <button @click="onDeleteUser">Delete</button>
+      <router-link :to="`/user/${user.id}`" tag="button" class="btn btn-info">Info</router-link>
+      <button @click="onDeleteUser" class="btn btn-danger">Delete</button>
     </div>
   </div>
 </template>
@@ -34,36 +23,31 @@ export default {
 
   data() {
     return {
-      isEdit: false,
-      name: this.user.name || "",
-      email: this.user.email || "",
-      avatar: this.user.avatar || "",
+      // name: this.user.name || "",
+      // email: this.user.email || "",
+      // avatar: this.user.avatar || "",
     };
   },
 
   methods: {
-    toggleEditForm(value) {
-      this.isEdit = value;
-    },
-
-    onEditUser() {
-      if (!this.name || !this.email) {
-        return;
-      }
-
-      this.toggleEditForm(false);
-
-      const data = {
-        userId: this.user.id,
-        data: {
-          name: this.name,
-          email: this.email,
-          avatar: this.avatar
-        }
-      };
-
-      this.$store.dispatch("users/editUser", data);
-    },
+    // onEditUser() {
+    //   if (!this.name || !this.email) {
+    //     return;
+    //   }
+    //
+    //   this.toggleEditForm(false);
+    //
+    //   const data = {
+    //     userId: this.user.id,
+    //     data: {
+    //       name: this.name,
+    //       email: this.email,
+    //       avatar: this.avatar
+    //     }
+    //   };
+    //
+    //   this.$store.dispatch("users/editUser", data);
+    // },
 
     onDeleteUser() {
       this.$store.dispatch("users/deleteUser", this.user.id);

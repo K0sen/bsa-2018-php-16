@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <nav>
-      <ul>
+      <ul class="navbar">
         <li><router-link to="/users">Users</router-link></li>
+        <li><router-link to="/user/add">Add a user</router-link></li>
         <li><router-link to="/albums">Albums</router-link></li>
       </ul>
     </nav>
-    <UserList></UserList>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -33,5 +34,20 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   background: #e6e6e6;
+}
+
+.navbar {
+  margin-left: 150px;
+  padding-top: 15px;
+  justify-content: flex-start;
+}
+
+.navbar li {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.navbar li a {
+  color: black;
 }
 </style>
