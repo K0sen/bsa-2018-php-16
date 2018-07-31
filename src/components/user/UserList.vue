@@ -1,20 +1,6 @@
 <template>
   <div class="users-container">
-    <div class="nav">
-      <div class="form-control">
-        <span>Name:</span>
-        <input type="text" id="name" v-model.trim="newUser.name">
-      </div>
-      <div class="form-control">
-        <span>Email:</span>
-        <input type="text" id="email" v-model.trim="newUser.email">
-      </div>
-      <div class="form-control">
-        <span>Avatar link:</span>
-        <input type="text" id="avatar" v-model.trim="newUser.avatar">
-      </div>
-      <button @click="onAddUser">Add user</button>
-    </div>  
+    <UserForm v-bind:user="newUser" v-on:addUser="onAddUser"/>
     <div class="user-list">
       <template v-for="user in users">
         <UserItem :key="user.id" :user="user" />
@@ -26,12 +12,14 @@
 <script>
 import { mapState } from "vuex";
 import UserItem from "./UserItem";
+import UserForm from "./UserForm";
 import axios from "axios";
 
 export default {
   name: "UserList",
   components: {
-    UserItem
+    UserItem,
+    UserForm
   },
 
   data() {
@@ -44,14 +32,13 @@ export default {
     };
   },
 
-
-  beforeCreate() {
-      axios
-          .get("https://jsonplaceholder.typicode.com/users")
-          .then(response => {
-              this.$store.dispatch("users/loadUsers", response.data.reverse());
-          })
-          .catch(error => console.log(error));
+  created() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then(response => {
+        this.$store.dispatch("users/loadUsers", response.data.reverse());
+      })
+      .catch(error => console.log(error));
   },
 
     computed: {
@@ -59,12 +46,12 @@ export default {
   },
 
   methods: {
-    onAddUser() {
-      if (!this.newUser.name || !this.newUser.email) {
+    onAddUser(user) {
+      if (!user.name || !user.email) {
         return;
       }
-      
-      this.$store.dispatch('users/addUser', this.newUser);
+
+      this.$store.dispatch('users/addUser', user);
       this.clearAddForm();
     },
 
@@ -94,7 +81,7 @@ export default {
 }
 
 .form-control {
-  width: 250px;
+  width: 270px;
   padding: 5px;
   display: flex;
   justify-content: space-between;

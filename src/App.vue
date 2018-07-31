@@ -1,11 +1,17 @@
 <template>
   <div id="app">
+    <nav>
+      <ul>
+        <li><router-link to="/users">Users</router-link></li>
+        <li><router-link to="/albums">Albums</router-link></li>
+      </ul>
+    </nav>
     <UserList></UserList>
   </div>
 </template>
 
 <script>
-import UserList from "./components/UserList";
+import UserList from "./components/user/UserList";
 
 export default {
   name: "App",
