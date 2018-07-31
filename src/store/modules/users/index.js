@@ -18,9 +18,9 @@ const mutations = {
   ADD_USER(state, user) {
     state.users.push({
       id: ++lastId,
-      name: user.username,
+      name: user.name,
       email: user.email,
-      avatar: `https://randomuser.me/api/portraits/men/${lastId}.jpg`
+      avatar: user.avatar ? user.avatar : `https://randomuser.me/api/portraits/men/${lastId}.jpg`
     });
   },
 
