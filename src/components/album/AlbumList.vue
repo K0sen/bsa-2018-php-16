@@ -11,7 +11,7 @@
     <!--</div>-->
     <div class="album-list">
       <template v-for="album in albums">
-        <AlbumItem :key="album.id" :album="album" />
+        <AlbumItem v-on:getUpdatedAlbums="getUpdatedAlbums" :key="album.id" :album="album" />
       </template>
     </div>
   </div>
@@ -34,12 +34,18 @@ export default {
   },
 
   created() {
-    this.albums = this.getAlbumsWithUsers;
+    this.getUpdatedAlbums();
   },
 
   computed: {
     ...mapGetters("albums", ["getAlbumsWithUsers"])
   },
+
+  methods: {
+    getUpdatedAlbums() {
+      this.albums = this.getAlbumsWithUsers;
+    }
+  }
 };
 </script>
 

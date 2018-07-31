@@ -5,7 +5,7 @@
       <div>User: {{ album.user.name }}</div>
     </div>
     <div class="nav">
-      <!--<button @click="onDeleteAlbum">Delete</button>-->
+      <button class="btn btn-danger " @click="onDeleteAlbum">Delete</button>
     </div>
   </div>
 </template>
@@ -28,27 +28,10 @@ export default {
   },
 
   methods: {
-    onEditUser() {
-      if (!this.name || !this.email) {
-        return;
-      }
-
-      this.toggleEditForm(false);
-
-      const data = {
-        userId: this.user.id,
-        data: {
-          name: this.name,
-          email: this.email,
-          avatar: this.avatar
-        }
-      };
-
-      this.$store.dispatch("users/editUser", data);
-    },
-
-    onDeleteUser() {
-      this.$store.dispatch("users/deleteUser", this.user.id);
+    onDeleteAlbum() {
+      this.$store.dispatch("albums/deleteAlbum", this.album.id);
+      // only that way it triggers updating albums
+      this.$emit('getUpdatedAlbums')
     }
   }
 };

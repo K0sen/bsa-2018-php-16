@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-let lastId = 0;
+let lastId = 30;
 
 const state = {
   albums: [
@@ -185,11 +185,11 @@ const mutations = {
     });
   },
 
-  DELETE_ALBUM(state, userId) {
-    const ind = state.users.findIndex(user => user.id === userId);
+  DELETE_ALBUM(state, albumId) {
+    const ind = state.albums.findIndex(album => album.id === albumId);
 
     if (ind !== -1) {
-      state.users.splice(ind, 1);
+      state.albums.splice(ind, 1);
     }
   },
   //

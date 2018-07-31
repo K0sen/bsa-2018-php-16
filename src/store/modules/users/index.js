@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-let lastId = 0;
+let lastId = 3;
 
 // local state
 const state = {
