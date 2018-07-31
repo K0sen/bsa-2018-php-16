@@ -23,32 +23,10 @@ export default {
 
   data() {
     return {
-      // name: this.user.name || "",
-      // email: this.user.email || "",
-      // avatar: this.user.avatar || "",
     };
   },
 
   methods: {
-    // onEditUser() {
-    //   if (!this.name || !this.email) {
-    //     return;
-    //   }
-    //
-    //   this.toggleEditForm(false);
-    //
-    //   const data = {
-    //     userId: this.user.id,
-    //     data: {
-    //       name: this.name,
-    //       email: this.email,
-    //       avatar: this.avatar
-    //     }
-    //   };
-    //
-    //   this.$store.dispatch("users/editUser", data);
-    // },
-
     onDeleteUser() {
       this.$store.dispatch("users/deleteUser", this.user.id);
     }

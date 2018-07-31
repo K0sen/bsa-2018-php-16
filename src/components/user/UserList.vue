@@ -1,6 +1,14 @@
 <template>
   <div class="container">
-    <!--<UserForm v-bind:user="newUser" v-on:addUser="onAddUser"/>-->
+    <div class="user-search">
+      <input type="text"
+             placeholder="Name"
+             v-model="searchName">
+      <input type="email"
+             placeholder="Email"
+             v-model="searchEmail">
+      <button class="btn btn-info" @click="searchUsers">Search users</button>
+    </div>
     <div class="user-list">
       <template v-for="user in users">
         <UserItem :key="user.id" :user="user" />
@@ -12,7 +20,6 @@
 <script>
 import { mapState } from "vuex";
 import UserItem from "./UserItem";
-import UserForm from "./UserForm";
 
 export default {
   name: "UserList",
@@ -22,20 +29,33 @@ export default {
 
   data() {
     return {
+      users: this.$store.state.users.users,
+      searchName: '',
+      searchEmail: ''
     };
   },
 
-    computed: {
-    ...mapState("users", ["users"])
+  methods: {
+    searchUsers() {
+      this.users = this.$store.getters['users/searchUsers'](this.searchName, this.searchEmail);
+    }
   },
+
+  // computed: {
+  //   ...mapState("users", ["users"])
+  // },
 };
 </script>
 
 <style scoped>
-.user-list {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  .user-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .user-search input {
+    display: block;
+  }
 </style>

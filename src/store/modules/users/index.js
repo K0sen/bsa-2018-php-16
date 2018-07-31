@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-let lastId = 3;
+let lastId = 0;
 
 // local state
 const state = {
@@ -8,9 +8,14 @@ const state = {
 };
 
 const getters = {
-  // state is module's local state
-  sortedByName: state => {
-    return state.users.sort((a, b) => a.name < b.name);
+  searchUsers: state => (name, email) => {
+    console.log(name, email);
+    return state.users.filter(user => {
+      return (
+        user.name.toLowerCase().includes(name.toLowerCase()) &&
+        user.email.toLowerCase().includes(email.toLowerCase())
+      );
+    });
   },
 
   getById: state => id => {
