@@ -5,6 +5,7 @@ import UserView from './components/user/UserView';
 import UserForm from './components/user/UserForm';
 import AlbumList from './components/album/AlbumList';
 import AlbumView from './components/album/AlbumView';
+import AlbumForm from './components/album/AlbumForm';
 
 Vue.use(Router);
 
@@ -37,8 +38,16 @@ export default new Router({
       component: AlbumList
     },
     {
+      path: "/album/add",
+      component: AlbumForm
+    },
+    {
       path: "/album/:id",
       component: AlbumView
+    },
+    {
+      path: "/album/:id/edit",
+      component: AlbumForm
     },
   ]
 });

@@ -3,6 +3,7 @@
     <div class="album-info">
       <div>Title: {{ album.title }}</div>
       <div>User: {{ album.user.name }}</div>
+      <div><img :src="album.user.avatar" alt="avatar" class="user__avatar"></div>
     </div>
     <div class="nav">
       <router-link :to="`/album/${album.id}`" tag="button" class="btn btn-info">Info</router-link>

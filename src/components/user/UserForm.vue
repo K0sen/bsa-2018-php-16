@@ -19,6 +19,30 @@
 
 <script>
   export default {
+    data() {
+      return {
+        id: this.$route.params.id,
+        user: null,
+        newUser: {
+          name: null,
+          email: null,
+          avatar: null
+        }
+      };
+    },
+
+    created() {
+      let user = this.$store.getters['users/getById'](this.id);
+      if (user) {
+        this.user = user;
+        this.newUser = {
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar
+        }
+      }
+    },
+
     methods: {
       onAddUser: function () {
         if (!this.newUser.name || !this.newUser.email) {
@@ -47,30 +71,6 @@
         }).then(() => this.$router.push(`/user/${id}`));
       },
     },
-
-    data() {
-      return {
-        id: this.$route.params.id,
-        user: null,
-        newUser: {
-          name: '',
-          email: '',
-          avatar: ''
-        }
-      };
-    },
-
-    created() {
-      let user = this.$store.getters['users/getById'](this.id);
-      if (user) {
-        this.user = user;
-        this.newUser = {
-          name: user.name,
-          email: user.email,
-          avatar: user.avatar
-        }
-      }
-    }
   }
 </script>
 

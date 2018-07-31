@@ -173,10 +173,11 @@ const getters = {
     });
   },
 
-  getById: state => id => {
+  getById: (state, getters, rootState, rootGetters) => id => {
     for (let i in state.albums) {
       if (state.albums[i].id === parseInt(id)) {
-        return state.albums[i];
+        let user = rootGetters['users/getById'](state.albums[i].userId);
+        return {...state.albums[i], user: user};
       }
     }
 
@@ -200,34 +201,32 @@ const mutations = {
       state.albums.splice(ind, 1);
     }
   },
-  //
-  // EDIT_USER(state, { userId, data }) {
-  //   const ind = state.users.findIndex(user => user.id === userId);
-  //
-  //   if (ind !== -1) {
-  //     const updatedUser = {
-  //       id: userId,
-  //       name: data.name,
-  //       email: data.email,
-  //       avatar: data.email !== '' ? data.avatar : `https://randomuser.me/api/portraits/men/${lastId}.jpg`
-  //     };
-  //
-  //     Vue.set(state.users, ind, updatedUser);
-  //   }
-  // },
+
+  EDIT_ALBUM(state, { albumId, data }) {
+    const ind = state.albums.findIndex(album => album.id === albumId);
+
+    if (ind !== -1) {
+      const updatedAlbum = {
+        id: albumId,
+        title: data.title,
+        userId: data.userId
+      };
+
+      Vue.set(state.albums, ind, updatedAlbum);
+    }
+  },
 };
 
 const actions = {
-  // // first param is context object
-  // addUser({ state, commit, rootState }, data) {
-  //   return new Promise(resolve => {
-  //     setTimeout(() => {
-  //       commit('ADD_USER', data);
-  //       resolve(state.users[state.users.length - 1]);
-  //     }, 250);
-  //   });
-  // },
-  //
+  addAlbum({ state, commit, rootState }, data) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        commit('ADD_ALBUM', data);
+        resolve(state.albums[state.albums.length - 1]);
+      }, 250);
+    });
+  },
+
   deleteAlbum({ commit }, albumId) {
     return new Promise(resolve => {
       setTimeout(() => {
@@ -236,15 +235,15 @@ const actions = {
       }, 250);
     });
   },
-  //
-  // editUser({ commit }, data) {
-  //   return new Promise(resolve => {
-  //     setTimeout(() => {
-  //       commit('EDIT_USER', data);
-  //       resolve();
-  //     }, 250);
-  //   });
-  // },
+
+  editAlbum({ commit }, data) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        commit('EDIT_ALBUM', data);
+        resolve();
+      }, 250);
+    });
+  },
 
   loadAlbums({ commit }, albums) {
     for (let album of albums) {

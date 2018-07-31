@@ -1,6 +1,6 @@
 <template>
   <div v-if="user" class="user-item-container">
-    <h2>Info about #{{ user.id }}</h2>
+    <h2>Info about user #{{ user.id }}</h2>
     <div class="user-info">
       <div>{{ user.name }}</div>
       <div>{{ user.email }}</div>

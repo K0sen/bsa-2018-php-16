@@ -5,6 +5,7 @@
         <li><router-link to="/users">Users</router-link></li>
         <li><router-link to="/user/add">Add a user</router-link></li>
         <li><router-link to="/albums">Albums</router-link></li>
+        <li><router-link to="/album/add">Add an album</router-link></li>
       </ul>
     </nav>
     <router-view></router-view>

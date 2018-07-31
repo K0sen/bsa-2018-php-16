@@ -1,17 +1,18 @@
 <template>
   <div v-if="album" class="user-item-container">
-    <h2>Info about #{{ album.id }}</h2>
+    <h2>Info about album #{{ album.id }}</h2>
     <div class="user-info">
       <div>{{ album.title }}</div>
-      <router-link :to="`/user/${album.userId}`" >User Id: {{ album.userId }}</router-link>
+      <router-link :to="`/user/${album.user.id}`" >User: {{ album.user.name }}</router-link>
+      <div><img :src="album.user.avatar" alt="avatar" class="user__avatar"></div>
     </div>
     <div class="nav">
-      <!--<router-link :to="`/user/${user.id}/edit`" tag="button" class="btn btn-info">Update</router-link>-->
+      <router-link :to="`/album/${album.id}/edit`" tag="button" class="btn btn-info">Update</router-link>
       <button class="btn btn-danger" @click="onDeleteAlbum">Delete</button>
     </div>
   </div>
   <div v-else class="container">
-    No users. Go to the main page to load some.
+    No albums. Go to the main page to load some.
   </div>
 </template>
 
@@ -33,6 +34,7 @@ export default {
 
   computed: {
     ...mapGetters("albums", ["getById"]),
+    ...mapState("users", ["users"])
   },
 
   methods: {

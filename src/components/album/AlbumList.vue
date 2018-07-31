@@ -1,18 +1,21 @@
 <template>
   <div class="container">
     <div class="album-filter">
-      <label for="user-select">Select user</label>
-      <select id="user-select" v-model="userId" @change="getUpdatedAlbums">
+      <label for="user-select">Select particular user albums</label>
+      <select class="form-control" id="user-select" v-model="userId" @change="getUpdatedAlbums">
         <option :value="null">Choose user</option>
         <option v-for="user in users" v-bind:value="user.id">
           {{ user.name }}
         </option>
       </select>
     </div>
-    <div class="album-list">
+    <div v-if="albums" class="album-list">
       <template v-for="album in albums">
         <AlbumItem v-on:getUpdatedAlbums="getUpdatedAlbums" :key="album.id" :album="album" />
       </template>
+    </div>
+    <div v-else class="album-list">
+      No albums
     </div>
   </div>
 </template>

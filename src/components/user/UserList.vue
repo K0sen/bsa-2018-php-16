@@ -9,10 +9,13 @@
              v-model="searchEmail">
       <button class="btn btn-info" @click="searchUsers">Search users</button>
     </div>
-    <div class="user-list">
+    <div v-if="users" class="user-list">
       <template v-for="user in users">
         <UserItem :key="user.id" :user="user" />
       </template>
+    </div>
+    <div v-else class="user-list">
+      No users :(
     </div>
   </div>
 </template>

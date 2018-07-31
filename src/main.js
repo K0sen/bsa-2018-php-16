@@ -27,7 +27,7 @@ new Vue({
     //   .catch(error => console.log(error));
     // load pictures
     // axios
-    //   .get("https://jsonplaceholder.typicode.com/users")
+    //   .get("https://jsonplaceholder.typicode.com/photos")
     //   .then(response => {
     //     this.$store.dispatch("pictires/loadUsers", response.data);
     //   })
