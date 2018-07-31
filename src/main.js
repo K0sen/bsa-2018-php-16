@@ -9,21 +9,23 @@ new Vue({
   render: createEl => createEl(App),
 
   created() {
-    // load users
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then(response => {
-        this.$store.dispatch("users/loadUsers", response.data);
-      })
-      .catch(error => console.log(error));
-    // load albums
+    // ===== Have problems with load that kind of... TODO
+
+    // // load users
+    // axios
+    //   .get("https://jsonplaceholder.typicode.com/users")
+    //   .then(response => {
+    //     this.$store.dispatch("users/loadUsers", response.data);
+    //   })
+    //   .catch(error => console.log(error));
+    // // load albums
     // axios
     //   .get("https://jsonplaceholder.typicode.com/albums")
     //   .then(response => {
     //     this.$store.dispatch("albums/loadAlbums", response.data);
     //   })
     //   .catch(error => console.log(error));
-    // // load pictures
+    // load pictures
     // axios
     //   .get("https://jsonplaceholder.typicode.com/users")
     //   .then(response => {

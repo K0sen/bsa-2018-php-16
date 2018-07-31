@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <!--<div class="user-search">-->
-      <!--<input type="text"-->
-             <!--placeholder="Name"-->
-             <!--v-model="searchName">-->
-      <!--<input type="email"-->
-             <!--placeholder="Email"-->
-             <!--v-model="searchEmail">-->
-      <!--<button class="btn btn-info" @click="searchUsers">Search users</button>-->
-    <!--</div>-->
+    <div class="album-filter">
+      <label for="user-select">Select user</label>
+      <select id="user-select" v-model="userId" @change="getUpdatedAlbums">
+        <option :value="null">Choose user</option>
+        <option v-for="user in users" v-bind:value="user.id">
+          {{ user.name }}
+        </option>
+      </select>
+    </div>
     <div class="album-list">
       <template v-for="album in albums">
         <AlbumItem v-on:getUpdatedAlbums="getUpdatedAlbums" :key="album.id" :album="album" />
@@ -29,7 +29,8 @@ export default {
 
   data() {
     return {
-      albums: null
+      albums: null,
+      userId: null
     };
   },
 
@@ -38,12 +39,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters("albums", ["getAlbumsWithUsers"])
+    ...mapGetters("albums", ["getAlbumsWithUsers"]),
+    ...mapState("users", ["users"])
   },
 
   methods: {
     getUpdatedAlbums() {
-      this.albums = this.getAlbumsWithUsers;
+      this.albums = this.getAlbumsWithUsers(this.userId);
     }
   }
 };

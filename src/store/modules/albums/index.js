@@ -158,10 +158,18 @@ const state = {
 };
 
 const getters = {
-  getAlbumsWithUsers: (state, getters, rootState, rootGetters) => {
-    return state.albums.map((album) => {
+  getAlbumsWithUsers: (state, getters, rootState, rootGetters) => userId => {
+    let albums = state.albums.map((album) => {
       let user = rootGetters['users/getById'](album.userId);
-      return {...album, user: user}
+      if (user && (!userId || userId === album.userId)) {
+
+        return {...album, user: user}
+      }
+    });
+
+    // Clears from undefined...
+    return albums.filter((a) => {
+      return a !== undefined;
     });
   },
 
