@@ -1,90 +1,53 @@
 <template>
-  <div class="users-container">
-    <!--<UserForm v-bind:user="newUser" v-on:addUser="onAddUser"/>-->
-    <!--<div class="user-list">-->
-      <!--<template v-for="user in users">-->
-        <!--<UserItem :key="user.id" :user="user" />-->
-      <!--</template>-->
+  <div class="container">
+    <!--<div class="user-search">-->
+      <!--<input type="text"-->
+             <!--placeholder="Name"-->
+             <!--v-model="searchName">-->
+      <!--<input type="email"-->
+             <!--placeholder="Email"-->
+             <!--v-model="searchEmail">-->
+      <!--<button class="btn btn-info" @click="searchUsers">Search users</button>-->
     <!--</div>-->
-    sdfda
+    <div class="album-list">
+      <template v-for="album in albums">
+        <AlbumItem :key="album.id" :album="album" />
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import UserItem from "./AlbumItem";
-import UserForm from "./AlbumForm";
-import axios from "axios";
+import { mapState, mapGetters } from "vuex";
+import AlbumItem from "./AlbumItem";
 
 export default {
   name: "AlbumList",
   components: {
-    UserItem,
-    UserForm
+    AlbumItem,
   },
 
   data() {
     return {
-      newUser: {
-        name: '',
-        email: '',
-        avatar: ''
-      }
+      albums: null
     };
   },
 
   created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then(response => {
-        this.$store.dispatch("users/loadUsers", response.data.reverse());
-      })
-      .catch(error => console.log(error));
+    this.albums = this.getAlbumsWithUsers;
   },
 
-    computed: {
-    ...mapState("users", ["users"])
+  computed: {
+    ...mapGetters("albums", ["getAlbumsWithUsers"])
   },
-
-  methods: {
-    onAddUser(user) {
-      if (!user.name || !user.email) {
-        return;
-      }
-
-      this.$store.dispatch('users/addUser', user);
-      this.clearAddForm();
-    },
-
-    clearAddForm() {
-      this.newUser = {
-        name: '',
-        email: '',
-        avatar: ''
-      };
-    }
-  }
 };
 </script>
 
 <style scoped>
-.users-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 45px;
-}
-
-.user-list {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.form-control {
-  width: 270px;
-  padding: 5px;
-  display: flex;
-  justify-content: space-between;
-}
+  .album-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 </style>
