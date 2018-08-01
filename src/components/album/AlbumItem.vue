@@ -31,9 +31,9 @@ export default {
 
   methods: {
     onDeleteAlbum() {
-      this.$store.dispatch("albums/deleteAlbum", this.album.id);
+      this.$store.dispatch("albums/deleteAlbum", this.album.id)
       // only that way it triggers updating albums
-      this.$emit('getUpdatedAlbums')
+        .then(() => this.$emit('getUpdatedAlbums'));
     }
   }
 };

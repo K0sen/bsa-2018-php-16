@@ -11,7 +11,7 @@
     </div>
     <div v-if="users" class="user-list">
       <template v-for="user in users">
-        <UserItem :key="user.id" :user="user" />
+        <UserItem v-on:getUpdatedUsers="searchUsers" :key="user.id" :user="user" />
       </template>
     </div>
     <div v-else class="user-list">

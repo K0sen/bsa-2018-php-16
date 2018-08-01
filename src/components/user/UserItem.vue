@@ -28,7 +28,8 @@ export default {
 
   methods: {
     onDeleteUser() {
-      this.$store.dispatch("users/deleteUser", this.user.id);
+      this.$store.dispatch("users/deleteUser", this.user.id)
+        .then(() => this.$emit('getUpdatedUsers'));
     }
   }
 };

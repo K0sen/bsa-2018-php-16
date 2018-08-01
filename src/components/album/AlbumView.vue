@@ -42,7 +42,6 @@ export default {
   created() {
     this.album = this.getById(this.id);
     this.photos = this.getByAlbumId(this.id);
-    console.log(this.photos);
   },
 
   computed: {
