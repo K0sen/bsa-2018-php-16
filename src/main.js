@@ -39,7 +39,13 @@ new Vue({
 });
 
 // TODO
+
+// Trouble:
+// delete after search not updates !!
+
+// Quest
 // Why mutations is UPPER_CASE? convention?
+// How to subscribe on delete photo event correctly?.. So if change state re-renders component
 // why to name a components?
 // how to call getters correctly?
 // why data in storage is const ??

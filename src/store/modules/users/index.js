@@ -31,7 +31,6 @@ const state = {
 
 const getters = {
   searchUsers: state => (name, email) => {
-    console.log(name, email);
     return state.users.filter(user => {
       return (
         user.name.toLowerCase().includes(name.toLowerCase()) &&
@@ -46,6 +45,7 @@ const getters = {
         return state.users[i];
       }
     }
+
     return null;
   }
 };

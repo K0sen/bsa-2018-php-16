@@ -51,18 +51,20 @@ const state = {
 
 const getters = {
   getByAlbumId: state => albumId => {
-    return state.photos.filter((photo) => photo.albums === albumId);
+    return state.photos.filter((photo) => photo.albumId === parseInt(albumId));
   }
 };
 
 const mutations = {
-  ADD_ALBUM(state, photo) {
+  ADD_PHOTO(state, photo) {
+    console.log(state);
     state.photos.push({
       id: ++lastId,
       title: photo.title,
       albumId: photo.albumId,
       url: photo.url ? photo.url : `https://randomuser.me/api/portraits/men/${lastId + 40}.jpg`,
     });
+    console.log(state);
   },
 
   DELETE_PHOTO(state, photoId) {
