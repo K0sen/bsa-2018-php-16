@@ -57,14 +57,12 @@ const getters = {
 
 const mutations = {
   ADD_PHOTO(state, photo) {
-    console.log(state);
     state.photos.push({
       id: ++lastId,
       title: photo.title,
       albumId: photo.albumId,
       url: photo.url ? photo.url : `https://randomuser.me/api/portraits/men/${lastId + 40}.jpg`,
     });
-    console.log(state);
   },
 
   DELETE_PHOTO(state, photoId) {

@@ -196,8 +196,6 @@ const mutations = {
 
   DELETE_ALBUM(state, albumId) {
     const ind = state.albums.findIndex(album => album.id === albumId);
-    console.log(state);
-    console.log(albumId);
 
     if (ind !== -1) {
       state.albums.splice(ind, 1);
